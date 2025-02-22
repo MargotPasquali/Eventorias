@@ -7,28 +7,35 @@
 
 import SwiftUI
 import FirebaseCore
+import FirebaseAppCheck
 
 
 class AppDelegate: NSObject, UIApplicationDelegate {
-  func application(_ application: UIApplication,
-                   didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-    FirebaseApp.configure()
-
-    return true
-  }
+    func application(_ application: UIApplication,
+                     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        
+        // Configure App Check avec le fournisseur de débogage
+        let providerFactory = AppCheckDebugProviderFactory()
+        AppCheck.setAppCheckProviderFactory(providerFactory)
+        
+        FirebaseApp.configure()
+        return true
+    }
+    
+    
 }
 
 @main
 struct EventoriasApp: App {
-  // register app delegate for Firebase setup
-  @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-
-
-  var body: some Scene {
-    WindowGroup {
-      NavigationView {
-          LoginView(viewModel: AuthenticationViewModel())
-      }
+    // register app delegate for Firebase setup
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    
+    
+    var body: some Scene {
+        WindowGroup {
+            NavigationView {
+                LoginView(viewModel: AuthenticationViewModel())
+            }
+        }
     }
-  }
 }

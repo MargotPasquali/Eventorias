@@ -7,14 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AE104D082D6A18D900028254 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = AE3457492D6890E10077DFD1 /* FirebaseAnalytics */; };
+		AE104D092D6A18D900028254 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = AE34574B2D6890E10077DFD1 /* FirebaseAnalyticsOnDeviceConversion */; };
+		AE104D0A2D6A18D900028254 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = AE34574D2D6890E10077DFD1 /* FirebaseAnalyticsWithoutAdIdSupport */; };
+		AE104D0B2D6A18D900028254 /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = AE34574F2D6890E10077DFD1 /* FirebaseAppCheck */; };
+		AE104D0C2D6A18D900028254 /* FirebaseAppDistribution-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = AE3457512D6890E10077DFD1 /* FirebaseAppDistribution-Beta */; };
+		AE104D1D2D6A193F00028254 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = AE104D1C2D6A193F00028254 /* FirebaseAuth */; };
 		AE3457152D688FCE0077DFD1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE3457142D688FCE0077DFD1 /* Assets.xcassets */; };
-		AE34574A2D6890E10077DFD1 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = AE3457492D6890E10077DFD1 /* FirebaseAnalytics */; };
-		AE34574C2D6890E10077DFD1 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = AE34574B2D6890E10077DFD1 /* FirebaseAnalyticsOnDeviceConversion */; };
-		AE34574E2D6890E10077DFD1 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = AE34574D2D6890E10077DFD1 /* FirebaseAnalyticsWithoutAdIdSupport */; };
-		AE3457502D6890E10077DFD1 /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = AE34574F2D6890E10077DFD1 /* FirebaseAppCheck */; };
-		AE3457522D6890E10077DFD1 /* FirebaseAppDistribution-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = AE3457512D6890E10077DFD1 /* FirebaseAppDistribution-Beta */; };
 		AE3457722D68B0460077DFD1 /* EventoriasDataService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE3457712D68B0460077DFD1 /* EventoriasDataService.framework */; };
 		AE3457732D68B0460077DFD1 /* EventoriasDataService.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AE3457712D68B0460077DFD1 /* EventoriasDataService.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		AE361BBB2D6A17AE002CBDFE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AE361BBA2D6A17AE002CBDFE /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +48,7 @@
 		AE3457142D688FCE0077DFD1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AE34571D2D688FCE0077DFD1 /* EventoriasTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EventoriasTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE3457712D68B0460077DFD1 /* EventoriasDataService.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = EventoriasDataService.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AE361BBA2D6A17AE002CBDFE /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -71,12 +74,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AE3457502D6890E10077DFD1 /* FirebaseAppCheck in Frameworks */,
-				AE34574A2D6890E10077DFD1 /* FirebaseAnalytics in Frameworks */,
-				AE3457522D6890E10077DFD1 /* FirebaseAppDistribution-Beta in Frameworks */,
-				AE34574E2D6890E10077DFD1 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
+				AE104D0C2D6A18D900028254 /* FirebaseAppDistribution-Beta in Frameworks */,
+				AE104D0B2D6A18D900028254 /* FirebaseAppCheck in Frameworks */,
+				AE104D0A2D6A18D900028254 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
+				AE104D092D6A18D900028254 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
+				AE104D082D6A18D900028254 /* FirebaseAnalytics in Frameworks */,
+				AE104D1D2D6A193F00028254 /* FirebaseAuth in Frameworks */,
 				AE3457722D68B0460077DFD1 /* EventoriasDataService.framework in Frameworks */,
-				AE34574C2D6890E10077DFD1 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -93,6 +97,7 @@
 		AE3457042D688FCD0077DFD1 = {
 			isa = PBXGroup;
 			children = (
+				AE361BBA2D6A17AE002CBDFE /* GoogleService-Info.plist */,
 				AE34573A2D6890070077DFD1 /* Resources */,
 				AE34570F2D688FCD0077DFD1 /* Sources */,
 				AE3457202D688FCE0077DFD1 /* EventoriasTests */,
@@ -154,6 +159,7 @@
 				AE34574D2D6890E10077DFD1 /* FirebaseAnalyticsWithoutAdIdSupport */,
 				AE34574F2D6890E10077DFD1 /* FirebaseAppCheck */,
 				AE3457512D6890E10077DFD1 /* FirebaseAppDistribution-Beta */,
+				AE104D1C2D6A193F00028254 /* FirebaseAuth */,
 			);
 			productName = Eventorias;
 			productReference = AE34570D2D688FCD0077DFD1 /* Eventorias.app */;
@@ -230,6 +236,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AE3457152D688FCE0077DFD1 /* Assets.xcassets in Resources */,
+				AE361BBB2D6A17AE002CBDFE /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -527,6 +534,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		AE104D1C2D6A193F00028254 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AE3457482D6890E10077DFD1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
 		AE3457492D6890E10077DFD1 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = AE3457482D6890E10077DFD1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
