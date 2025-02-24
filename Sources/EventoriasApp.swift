@@ -34,7 +34,7 @@ struct EventoriasApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationView {
-                LoginView(viewModel: AuthenticationViewModel())
+                WelcomeView()
             }
         }
     }

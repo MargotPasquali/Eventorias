@@ -17,6 +17,7 @@
 		AE3457722D68B0460077DFD1 /* EventoriasDataService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE3457712D68B0460077DFD1 /* EventoriasDataService.framework */; };
 		AE3457732D68B0460077DFD1 /* EventoriasDataService.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AE3457712D68B0460077DFD1 /* EventoriasDataService.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		AE361BBB2D6A17AE002CBDFE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AE361BBA2D6A17AE002CBDFE /* GoogleService-Info.plist */; };
+		AE47F9DA2D6B2C5200378B68 /* Inter-VariableFont_opsz,wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AE47F9D92D6B2C5200378B68 /* Inter-VariableFont_opsz,wght.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,8 @@
 		AE34571D2D688FCE0077DFD1 /* EventoriasTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EventoriasTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE3457712D68B0460077DFD1 /* EventoriasDataService.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = EventoriasDataService.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE361BBA2D6A17AE002CBDFE /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		AE47F9D92D6B2C5200378B68 /* Inter-VariableFont_opsz,wght.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-VariableFont_opsz,wght.ttf"; sourceTree = "<group>"; };
+		AE6921752D6CAA3F00D25C60 /* Eventorias-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Eventorias-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -97,6 +100,7 @@
 		AE3457042D688FCD0077DFD1 = {
 			isa = PBXGroup;
 			children = (
+				AE6921752D6CAA3F00D25C60 /* Eventorias-Info.plist */,
 				AE361BBA2D6A17AE002CBDFE /* GoogleService-Info.plist */,
 				AE34573A2D6890070077DFD1 /* Resources */,
 				AE34570F2D688FCD0077DFD1 /* Sources */,
@@ -118,6 +122,7 @@
 		AE34573A2D6890070077DFD1 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				AE47F9D82D6B2C3B00378B68 /* Font */,
 				AE34573C2D6890110077DFD1 /* Preview Content */,
 				AE3457142D688FCE0077DFD1 /* Assets.xcassets */,
 			);
@@ -130,6 +135,14 @@
 				AE3457712D68B0460077DFD1 /* EventoriasDataService.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		AE47F9D82D6B2C3B00378B68 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				AE47F9D92D6B2C5200378B68 /* Inter-VariableFont_opsz,wght.ttf */,
+			);
+			path = Font;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -236,6 +249,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AE3457152D688FCE0077DFD1 /* Assets.xcassets in Resources */,
+				AE47F9DA2D6B2C5200378B68 /* Inter-VariableFont_opsz,wght.ttf in Resources */,
 				AE361BBB2D6A17AE002CBDFE /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -405,6 +419,7 @@
 				DEVELOPMENT_TEAM = FQJ5XK4959;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Eventorias-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -434,6 +449,7 @@
 				DEVELOPMENT_TEAM = FQJ5XK4959;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Eventorias-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

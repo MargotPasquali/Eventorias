@@ -11,47 +11,67 @@ import SwiftUI
 @MainActor
 class AuthenticationViewModel: ObservableObject {
     
+    // MARK: - Enum
+    
+    enum AuthenticationViewModelError: Error {
+        case invalidCredentials
+        case authenticationFailed
+        case logoutFailed
+        
+        var localizedDescription: String {
+            switch self {
+            case .invalidCredentials:
+                return "Credentials are invalid. Please try again."
+            case .authenticationFailed:
+                return "Authentication failed. Please try again."
+            case .logoutFailed:
+                return "Failed to logout. Please try again."
+            }
+        }
+    }
+    
     // MARK: - Properties
+    
     @Published var isAuthenticated = false
     @Published var errorMessage: String?
     @Published var email = ""
     @Published var password = ""
+    @Published var isLoading = false
+    @Published var name = ""
     
     private let authService: AuthenticationService
     
-    // MARK: - Init
     init(authService: AuthenticationService = RemoteAuthenticationService.shared) {
         self.authService = authService
     }
     
-    func signUp(email: String, password: String) {
-        Task {
-            do {
-                let user = try await authService.signUp(email: email, password: password)
-                isAuthenticated = user != nil
-            } catch {
-                errorMessage = error.localizedDescription
+    func signIn() async {
+        isLoading = true
+        errorMessage = nil
+        
+        do {
+            let user = try await authService.signIn(email: email, password: password)
+            if user != nil {
+                isAuthenticated = true
+            } else {
+                errorMessage = AuthenticationViewModelError.invalidCredentials.localizedDescription
+                isAuthenticated = false
             }
+        } catch {
+            isAuthenticated = false
+            errorMessage = AuthenticationViewModelError.authenticationFailed.localizedDescription
         }
+        
+        isLoading = false
     }
-    
-    func signIn() {
-        Task {
-            do {
-                let user = try await authService.signIn(email: email, password: password)
-                isAuthenticated = user != nil
-            } catch {
-                errorMessage = error.localizedDescription
-            }
-        }
-    }
+
     
     func signOut() {
         do {
             try authService.signOut()
             isAuthenticated = false
         } catch {
-            errorMessage = error.localizedDescription
+            errorMessage = AuthenticationViewModelError.logoutFailed.localizedDescription
         }
     }
 }
