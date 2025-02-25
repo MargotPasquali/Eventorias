@@ -38,11 +38,23 @@ class AuthenticationViewModel: ObservableObject {
     @Published var password = ""
     @Published var isLoading = false
     @Published var name = ""
-    
+
     private let authService: AuthenticationService
     
     init(authService: AuthenticationService = RemoteAuthenticationService.shared) {
         self.authService = authService
+        checkCurrentUser()
+    }
+    
+    func checkCurrentUser() {
+        if let firebaseUser = authService.currentUser {
+            isAuthenticated = true
+            let user = User(uid: firebaseUser.uid, email: firebaseUser.email, displayName: firebaseUser.displayName)
+            self.email = user.email
+        } else {
+            isAuthenticated = false
+            email = ""
+        }
     }
     
     func signIn() async {
@@ -50,9 +62,10 @@ class AuthenticationViewModel: ObservableObject {
         errorMessage = nil
         
         do {
-            let user = try await authService.signIn(email: email, password: password)
-            if user != nil {
+            if let firebaseUser = try await authService.signIn(email: email, password: password) {
                 isAuthenticated = true
+                let user = User(uid: firebaseUser.uid, email: firebaseUser.email, displayName: firebaseUser.displayName)
+                self.email = user.email
             } else {
                 errorMessage = AuthenticationViewModelError.invalidCredentials.localizedDescription
                 isAuthenticated = false
@@ -64,12 +77,13 @@ class AuthenticationViewModel: ObservableObject {
         
         isLoading = false
     }
-
     
     func signOut() {
         do {
             try authService.signOut()
             isAuthenticated = false
+            email = ""
+            password = ""
         } catch {
             errorMessage = AuthenticationViewModelError.logoutFailed.localizedDescription
         }

@@ -4,13 +4,18 @@
 //
 //  Created by Margot Pasquali on 23/02/2025.
 //
+
 import SwiftUI
 
 struct UserProfileView: View {
+
+    // MARK: - Properties
     @ObservedObject var viewModel: AuthenticationViewModel
     @State private var notificationsEnabled = false
-    
+
+    // MARK: - View
     var body: some View {
+
         NavigationStack {
             ZStack {
                 Color("BackgroundColor")
@@ -28,18 +33,15 @@ struct UserProfileView: View {
                     }
                     .padding(.horizontal, 10.0)
                     
-                    TextField("", text: .constant(viewModel.name))
+                    Text(viewModel.name.isEmpty ? "Non défini" : viewModel.name)
+                        .frame(maxWidth: .infinity, alignment: .leading)
                         .padding()
                         .background(Color("Purple"))
                         .cornerRadius(4)
-                        .disabled(true)
                         .foregroundColor(.white)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 4)
-                                .stroke(Color.gray.opacity(0.5), lineWidth: 1)
-                        )
                     
-                    TextField("", text: $viewModel.email, prompt: Text(viewModel.email).foregroundColor(.gray))
+                    Text(viewModel.email)
+                        .frame(maxWidth: .infinity, alignment: .leading)
                         .padding()
                         .background(Color("Purple"))
                         .cornerRadius(4)
@@ -61,12 +63,32 @@ struct UserProfileView: View {
                         Text(errorMessage)
                             .foregroundColor(.red)
                             .font(.caption)
-
                     }
+                    
+                    Button(action: {
+                        Task {
+                            viewModel.signOut()
+                        }
+                    }) {
+                        Text("Sign Out")
+                            .foregroundColor(Color("BrownPurple"))
+                            .font(Font.custom("Inter-Regular", size: 16))
+                    }
+                    .frame(maxWidth: .infinity)
+                    .padding()
+                    .background(Color("BackgroundColor"))
+                    .border(Color("Purple"), width: 3)
+                    .cornerRadius(8)
+                    .disabled(viewModel.isLoading)
+                    .padding(.top, 20)
+                    
                     Spacer()
                 }
                 .padding()
             }
+        }
+        .onAppear {
+            viewModel.checkCurrentUser()
         }
     }
 }

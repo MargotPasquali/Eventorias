@@ -30,12 +30,19 @@ struct EventoriasApp: App {
     // register app delegate for Firebase setup
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
+    @StateObject private var authViewModel = AuthenticationViewModel()
     
     var body: some Scene {
-        WindowGroup {
-            NavigationView {
-                WelcomeView()
+            WindowGroup {
+                NavigationStack {
+                    if authViewModel.isAuthenticated {
+                        SwitchTabView()
+                            .environmentObject(authViewModel)
+                    } else {
+                        WelcomeView()
+                            .environmentObject(authViewModel)
+                    }
+                }
             }
         }
-    }
 }

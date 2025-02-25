@@ -14,8 +14,6 @@
 		AE104D0C2D6A18D900028254 /* FirebaseAppDistribution-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = AE3457512D6890E10077DFD1 /* FirebaseAppDistribution-Beta */; };
 		AE104D1D2D6A193F00028254 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = AE104D1C2D6A193F00028254 /* FirebaseAuth */; };
 		AE3457152D688FCE0077DFD1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE3457142D688FCE0077DFD1 /* Assets.xcassets */; };
-		AE3457722D68B0460077DFD1 /* EventoriasDataService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE3457712D68B0460077DFD1 /* EventoriasDataService.framework */; };
-		AE3457732D68B0460077DFD1 /* EventoriasDataService.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AE3457712D68B0460077DFD1 /* EventoriasDataService.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		AE361BBB2D6A17AE002CBDFE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AE361BBA2D6A17AE002CBDFE /* GoogleService-Info.plist */; };
 		AE47F9DA2D6B2C5200378B68 /* Inter-VariableFont_opsz,wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AE47F9D92D6B2C5200378B68 /* Inter-VariableFont_opsz,wght.ttf */; };
 /* End PBXBuildFile section */
@@ -29,20 +27,6 @@
 			remoteInfo = Eventorias;
 		};
 /* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		AE3457742D68B0460077DFD1 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				AE3457732D68B0460077DFD1 /* EventoriasDataService.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		AE34570D2D688FCD0077DFD1 /* Eventorias.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Eventorias.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -83,7 +67,6 @@
 				AE104D092D6A18D900028254 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
 				AE104D082D6A18D900028254 /* FirebaseAnalytics in Frameworks */,
 				AE104D1D2D6A193F00028254 /* FirebaseAuth in Frameworks */,
-				AE3457722D68B0460077DFD1 /* EventoriasDataService.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -155,7 +138,6 @@
 				AE3457092D688FCD0077DFD1 /* Sources */,
 				AE34570A2D688FCD0077DFD1 /* Frameworks */,
 				AE34570B2D688FCD0077DFD1 /* Resources */,
-				AE3457742D68B0460077DFD1 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);

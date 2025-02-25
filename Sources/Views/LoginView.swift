@@ -27,6 +27,7 @@ struct LoginView: View {
                     TextField("", text: $viewModel.email, prompt: Text("Entrez votre email").foregroundColor(.gray))
                         .padding()
                         .background(Color("Purple"))
+                        .foregroundStyle(Color.white)
                         .font(Font.custom("Inter-Regular", size: 16))
                         .cornerRadius(4)
                         .autocapitalization(.none)
@@ -41,6 +42,7 @@ struct LoginView: View {
                         .font(Font.custom("Inter-Regular", size: 16))
                         .padding()
                         .background(Color("Purple"))
+                        .foregroundStyle(Color.white)
                         .cornerRadius(4)
                     
                     if let errorMessage = viewModel.errorMessage {
@@ -76,7 +78,8 @@ struct LoginView: View {
                 .padding(.horizontal, 20)
                 .padding(.top, 100)
                 .navigationDestination(isPresented: $viewModel.isAuthenticated) {
-                    EventListView()
+                    SwitchTabView()
+                        .environmentObject(viewModel)
                         .navigationBarBackButtonHidden(true)
                 }
             }

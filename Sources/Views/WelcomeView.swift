@@ -20,7 +20,7 @@ struct WelcomeView: View {
                         .navigationBarBackButtonHidden(true)
                     ) {
                         HStack {
-                            Image("Email")
+                            Image("email")
                                 .foregroundColor(.white)
                                 .padding(.trailing, 5.0)
                             Text("Sign in with email")

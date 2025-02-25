@@ -5,13 +5,13 @@
 //  Created by Margot Pasquali on 21/02/2025.
 //
 
-import Foundation
 import FirebaseAuth
 
-public protocol AuthenticationService {
+protocol AuthenticationService {
     func signUp(email: String, password: String) async throws -> User?
     func signIn(email: String, password: String) async throws -> User?
     func signOut() throws
+    var currentUser: User? { get }
 }
 
 final class RemoteAuthenticationService: AuthenticationService {
@@ -19,37 +19,26 @@ final class RemoteAuthenticationService: AuthenticationService {
     
     private init() {}
     
-    // SignUp
     func signUp(email: String, password: String) async throws -> User? {
-        do {
-            let authResult = try await Auth.auth().createUser(withEmail: email, password: password)
-            return authResult.user
-        } catch {
-            throw error
-        }
+        let authResult = try await Auth.auth().createUser(withEmail: email, password: password)
+        return convertToUser(authResult.user)
     }
     
-    // SignIn
     func signIn(email: String, password: String) async throws -> User? {
-        do {
-            let authResult = try await Auth.auth().signIn(withEmail: email, password: password)
-            return authResult.user
-        } catch {
-            throw error
-        }
+        let authResult = try await Auth.auth().signIn(withEmail: email, password: password)
+        return convertToUser(authResult.user)
     }
     
-    // SignOut
     func signOut() throws {
-        do {
-            try Auth.auth().signOut()
-        } catch {
-            throw error
-        }
+        try Auth.auth().signOut()
     }
     
-    // Vérifier si l'utilisateur est connecté
     var currentUser: User? {
-        return Auth.auth().currentUser
+        guard let firebaseUser = Auth.auth().currentUser else { return nil }
+        return convertToUser(firebaseUser)
+    }
+    
+    private func convertToUser(_ firebaseUser: FirebaseAuth.User) -> User {
+        return User(uid: firebaseUser.uid, email: firebaseUser.email ?? "", displayName: firebaseUser.displayName)
     }
 }
