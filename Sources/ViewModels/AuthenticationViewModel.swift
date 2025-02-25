@@ -10,13 +10,11 @@ import SwiftUI
 
 @MainActor
 class AuthenticationViewModel: ObservableObject {
-    
-    // MARK: - Enum
-    
     enum AuthenticationViewModelError: Error {
         case invalidCredentials
         case authenticationFailed
         case logoutFailed
+        case updateProfileFailed
         
         var localizedDescription: String {
             switch self {
@@ -26,11 +24,13 @@ class AuthenticationViewModel: ObservableObject {
                 return "Authentication failed. Please try again."
             case .logoutFailed:
                 return "Failed to logout. Please try again."
+            case .updateProfileFailed:
+                return "Failed to update profile. Please try again."
             }
         }
     }
     
-    // MARK: - Properties
+    private let authService: AuthenticationService
     
     @Published var isAuthenticated = false
     @Published var errorMessage: String?
@@ -38,8 +38,6 @@ class AuthenticationViewModel: ObservableObject {
     @Published var password = ""
     @Published var isLoading = false
     @Published var name = ""
-
-    private let authService: AuthenticationService
     
     init(authService: AuthenticationService = RemoteAuthenticationService.shared) {
         self.authService = authService
@@ -51,9 +49,11 @@ class AuthenticationViewModel: ObservableObject {
             isAuthenticated = true
             let user = User(uid: firebaseUser.uid, email: firebaseUser.email, displayName: firebaseUser.displayName)
             self.email = user.email
+            self.name = user.displayName ?? ""
         } else {
             isAuthenticated = false
             email = ""
+            name = ""
         }
     }
     
@@ -66,6 +66,7 @@ class AuthenticationViewModel: ObservableObject {
                 isAuthenticated = true
                 let user = User(uid: firebaseUser.uid, email: firebaseUser.email, displayName: firebaseUser.displayName)
                 self.email = user.email
+                self.name = user.displayName ?? ""
             } else {
                 errorMessage = AuthenticationViewModelError.invalidCredentials.localizedDescription
                 isAuthenticated = false
@@ -84,8 +85,26 @@ class AuthenticationViewModel: ObservableObject {
             isAuthenticated = false
             email = ""
             password = ""
+            name = ""
         } catch {
             errorMessage = AuthenticationViewModelError.logoutFailed.localizedDescription
         }
+    }
+    
+    func updateUserName(newName: String) async {
+        isLoading = true
+        errorMessage = nil
+        
+        do {
+            try await authService.updateUserName(newName: newName)
+            self.name = newName // Met à jour localement
+            checkCurrentUser() // Rafraîchit les données
+        } catch RemoteAuthenticationService.AuthenticationServiceError.userNotLoggedIn {
+            errorMessage = RemoteAuthenticationService.AuthenticationServiceError.userNotLoggedIn.localizedDescription
+        } catch {
+            errorMessage = AuthenticationViewModelError.updateProfileFailed.localizedDescription
+        }
+        
+        isLoading = false
     }
 }

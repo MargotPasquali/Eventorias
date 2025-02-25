@@ -11,6 +11,7 @@ protocol AuthenticationService {
     func signUp(email: String, password: String) async throws -> User?
     func signIn(email: String, password: String) async throws -> User?
     func signOut() throws
+    func updateUserName(newName: String) async throws
     var currentUser: User? { get }
 }
 
@@ -18,6 +19,20 @@ final class RemoteAuthenticationService: AuthenticationService {
     static let shared = RemoteAuthenticationService()
     
     private init() {}
+    
+    enum AuthenticationServiceError: Error {
+        case userNotLoggedIn
+        case profileUpdateFailed
+        
+        var localizedDescription: String {
+            switch self {
+            case .userNotLoggedIn:
+                return "User disconnected"
+            case .profileUpdateFailed:
+                return "Profile update failed. Please try again later."
+            }
+        }
+    }
     
     func signUp(email: String, password: String) async throws -> User? {
         let authResult = try await Auth.auth().createUser(withEmail: email, password: password)
@@ -31,6 +46,21 @@ final class RemoteAuthenticationService: AuthenticationService {
     
     func signOut() throws {
         try Auth.auth().signOut()
+    }
+    
+    func updateUserName(newName: String) async throws {
+        
+        guard let user = Auth.auth().currentUser else {
+            throw AuthenticationServiceError.userNotLoggedIn
+        }
+        
+        let request = user.createProfileChangeRequest()
+        request.displayName = newName
+        
+        // Wait for Firebase to save the new name
+        try await Task {
+            try await request.commitChanges()
+        }.value
     }
     
     var currentUser: User? {

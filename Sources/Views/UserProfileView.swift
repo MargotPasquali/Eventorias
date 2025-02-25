@@ -4,18 +4,15 @@
 //
 //  Created by Margot Pasquali on 23/02/2025.
 //
-
 import SwiftUI
 
 struct UserProfileView: View {
-
-    // MARK: - Properties
     @ObservedObject var viewModel: AuthenticationViewModel
     @State private var notificationsEnabled = false
-
-    // MARK: - View
+    @State private var showSuccess = false
+    @State private var newName: String = ""
+    
     var body: some View {
-
         NavigationStack {
             ZStack {
                 Color("BackgroundColor")
@@ -33,12 +30,34 @@ struct UserProfileView: View {
                     }
                     .padding(.horizontal, 10.0)
                     
-                    Text(viewModel.name.isEmpty ? "Non défini" : viewModel.name)
-                        .frame(maxWidth: .infinity, alignment: .leading)
+                    HStack {
+                        TextField("Entrez votre nom", text: $newName, prompt: Text(viewModel.name.isEmpty ? "Non défini" : viewModel.name).foregroundColor(.gray))
+                            .padding()
+                            .background(Color("Purple"))
+                            .cornerRadius(4)
+                            .foregroundColor(.white)
+                            .textInputAutocapitalization(.words)
+                        
+                        Button(action: {
+                            Task {
+                                await viewModel.updateUserName(newName: newName)
+                                showSuccess = true
+                            }
+                        }) {
+                            Text("Update name")
+                                .foregroundColor(Color("BackgroundColor"))
+                                .font(Font.custom("Inter-Regular", size: 16))
+                        }
+                        .frame(maxWidth: .infinity)
                         .padding()
-                        .background(Color("Purple"))
+                        .background(Color("BrownPurple"))
                         .cornerRadius(4)
-                        .foregroundColor(.white)
+                        .disabled(viewModel.isLoading || newName.isEmpty)
+                        .alert(isPresented: $showSuccess) {
+                            Alert(title: Text("Success"), message: Text("Votre nom a bien été modifié"), dismissButton: .default(Text("OK")))
+                        }
+                    }
+                    
                     
                     Text(viewModel.email)
                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -48,6 +67,8 @@ struct UserProfileView: View {
                         .autocapitalization(.none)
                         .keyboardType(.emailAddress)
                         .foregroundColor(.white)
+                    
+                    
                     
                     HStack {
                         Toggle("", isOn: $notificationsEnabled)
@@ -89,6 +110,7 @@ struct UserProfileView: View {
         }
         .onAppear {
             viewModel.checkCurrentUser()
+            newName = viewModel.name
         }
     }
 }
